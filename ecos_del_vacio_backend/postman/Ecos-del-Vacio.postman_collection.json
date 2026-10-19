@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "Ecos del Vacío API",
+    "description": "Pruebas de los endpoints del backend Express + PostgreSQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "personajeId", "value": "1" },
+    { "key": "partidaId", "value": "1" },
+    { "key": "finalId", "value": "1" }
+  ],
+  "item": [
+    { "name": "Estado API", "request": { "method": "GET", "url": "{{baseUrl}}/api/health" } },
+    { "name": "Listar personajes", "request": { "method": "GET", "url": "{{baseUrl}}/api/personajes" } },
+    { "name": "Obtener personaje", "request": { "method": "GET", "url": "{{baseUrl}}/api/personajes/{{personajeId}}" } },
+    {
+      "name": "Crear personaje",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Guardián\",\n  \"descripcion\": \"Protege los senderos del bosque.\",\n  \"habilidad\": \"Defensa\"\n}" },
+        "url": "{{baseUrl}}/api/personajes"
+      }
+    },
+    {
+      "name": "Actualizar personaje",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Viajero actualizado\",\n  \"descripcion\": \"Explora el bosque en busca de respuestas.\",\n  \"habilidad\": \"Exploración\"\n}" },
+        "url": "{{baseUrl}}/api/personajes/{{personajeId}}"
+      }
+    },
+    { "name": "Listar finales", "request": { "method": "GET", "url": "{{baseUrl}}/api/finales" } },
+    { "name": "Listar decisiones", "request": { "method": "GET", "url": "{{baseUrl}}/api/decisiones" } },
+    { "name": "Filtrar decisiones por escena", "request": { "method": "GET", "url": "{{baseUrl}}/api/decisiones?escena=Bosque%20antiguo" } },
+    {
+      "name": "Crear partida",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"jugador\": \"Jugador de prueba\",\n  \"personaje_id\": 1\n}" },
+        "url": "{{baseUrl}}/api/partidas"
+      }
+    },
+    { "name": "Listar partidas", "request": { "method": "GET", "url": "{{baseUrl}}/api/partidas" } },
+    {
+      "name": "Finalizar partida",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"final_id\": 1\n}" },
+        "url": "{{baseUrl}}/api/partidas/{{partidaId}}/finalizar"
+      }
+    }
+  ]
+}
